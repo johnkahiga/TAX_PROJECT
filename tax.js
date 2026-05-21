@@ -1,16 +1,15 @@
-// Write a program that takes input of someone's basic salary and benefits, adds them to find the gross salary then uses  the gross salary to find the NHIF. 
-function calc_gross(salary,benefits){
+document.getElementById('tax_form').addEventListener('submit',function(event){
+    event.preventDefault()
+    let basic_salary=Number(document.getElementById("basic_salary").value)
+    let benefits=Number(document.getElementById("benefits").value)
+    function calc_gross(salary,benefits){
     gross=salary+benefits
     return gross
-}
-let basic_salary=parseFloat(prompt('Enter Basic Salary:'))
-let benefits=parseFloat(prompt('Enter benefits:'))
-let gross_salary=calc_gross(basic_salary,benefits)
-console.log(`gross salary is ${gross_salary}`)
+    }
+    let gross_salary=calc_gross(basic_salary,benefits)
+    document.getElementById('gross').innerHTML=gross_salary
 
-// Continue with the program above, then use  the gross salary to find the NSSF. 
-// To find the Kenya NSSF Rate  using 6% of the Gross Salary. BUT ONLY A MINIMUM OF 18,000 Gross Salary CAN BE USED IN NSSF. 
-function find_NHIF(gross_salary){
+    function find_NHIF(gross_salary){
     if (gross_salary <= 5999){
          nhif= 150
     }    
@@ -78,13 +77,11 @@ function find_NHIF(gross_salary){
     } 
         
     return nhif
-}
-let find1=find_NHIF(gross_salary)
-console.log(`NHIF is ${find1}`)
+    }
+    let find1=find_NHIF(gross_salary)
+    document.getElementById('nhif').innerHTML=find1
 
-// Continue with the program above, then use  the gross salary to find the NSSF. 
-//  To find the Kenya NSSF Rate  using 6% of the Gross Salary. BUT ONLY A MINIMUM OF 18,000 Gross Salary CAN BE USED IN NSSF. 
-function find_NSSF(gross_salary){
+    function find_NSSF(gross_salary){
      if(gross_salary>=18000){
         nssf=0.06 * gross_salary
      }
@@ -94,31 +91,25 @@ function find_NSSF(gross_salary){
     }
         
     return nssf
-}
-let find2=find_NSSF(gross_salary)
-console.log( `NSSF is ${find2}`)
+    }
+    let find2=find_NSSF(gross_salary)
+    document.getElementById('nssf').innerHTML=find2
 
-//  Continue with the same program and calculate an individual’s NHDF using:
-//   i.e NHDF = gross_salary *  0.015
-function find_NHDF(gross_salary){
+    function find_NHDF(gross_salary){
     nhdf = gross_salary *  0.015
     return nhdf
-}
-let find3=find_NHDF(gross_salary)
-console.log(`NHDF is ${find3}`)
+    }
+    let find3=find_NHDF(gross_salary)
+    document.getElementById('nhdf').innerHTML=find3
 
-// Calculate the taxable income.
-// i.e taxable_income = gross salary - (NSSF + NHDF + NHIF)
-function find_taxableincome(){
+    function find_taxableincome(){
     taxable_income = gross_salary - (find1 + find2 + find3)
     return taxable_income
-}
-let find4=find_taxableincome()
-console.log(`Taxable income is ${find4}`)
+    }
+    let find4=find_taxableincome()
+    document.getElementById('taxable').innerHTML=find4
 
-// Continue with the same program and find the person's PAYEE using the taxable income above.
-
-function find_payee(taxable_income){
+    function find_payee(taxable_income){
     
     if (taxable_income <= 24000) {
     tax = taxable_income* 0.1;
@@ -134,17 +125,20 @@ function find_payee(taxable_income){
 
     let personal_relief = 2400
     return final_tax = Math.max(0, tax - personal_relief)
-}
-let taxable_income1 = gross_salary - (find1 + find2 + find3)
-let find5=find_payee(taxable_income1)
-console.log(`Payee is ${find5}`)
-
-// Continue with the same program and calculate an individual’s Net Salary using:
-// net_salary = gross_salary - (nhif + nhdf +  nssf + payee)
-function find_netsalary(){
+    }
+    let taxable_income1 = gross_salary - (find1 + find2 + find3)
+    let find5=find_payee(taxable_income1)
+    document.getElementById('payee').innerHTML=find5
+    
+    function find_netsalary(){
     net_salary = gross_salary - (find1+find2+find3+find5)
     return net_salary
-}
-net_salary1=find_netsalary()
-console.log( `net salary is ${net_salary1}`)
+    }
+    net_salary1=find_netsalary()
+    document.getElementById('netsalary').innerHTML=net_salary1
+
+
+
+
+})
 
