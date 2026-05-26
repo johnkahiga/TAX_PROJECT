@@ -93,7 +93,7 @@ document.getElementById('tax_form').addEventListener('submit', function (event){
     return nssf
     }
     let find2=find_NSSF(gross_salary)
-    document.getElementById('nssf').innerHTML=find2
+    document.getElementById('nssf').innerHTML=find2.toFixed(2)
 
     function find_NHDF(gross_salary){
     nhdf = gross_salary *  0.015
